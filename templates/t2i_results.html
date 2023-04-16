@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="w-100">
+        <section>
+            <div class="container">
+                <div class="row no-gutters justify-content-around ">
+                    {#                    <div class="col-xs-11 col-sm-11 col-md-5 col-lg-5 bg-image text-center justify-self-center my-3">#}
+                    {#                        <h2 class="text-center py-1">Reference Image</h2>#}
+                    {#                        <a class="bg-image">#}
+                    {#                            <img class="img-fluid image"#}
+                    {#                                 src="{{ url_for('get_image', dataset=dataset, image_name=reference_name) }}"#}
+                    {#                                 alt="Frame overview">#}
+                    {#                        </a>#}
+                    {#                    </div>#}
+
+                    <div class="col-xs-11 col-sm-11 col-md-10 col-lg-10 my-3">
+                        <h2 class="text-center py-1">Caption</h2>
+                        <div class="row container p-0 m-0 h-100 w-100">
+                            {#                            <div class="col-12 p-0 my-auto">#}
+                            {#                                <h4 class=" text-center border"> {{ caption }}</h4>#}
+                            {#                            </div>#}
+                            <div class="text-center center-block w-100 border col-12 p-0 my-auto">
+                                <form method="POST">
+                                    <textarea class='form-control' required="required" style="font-size: x-large"
+                                              id='custom_caption' name='custom_caption' rows="3"
+                                              type="text"
+                                              placeholder="Insert your caption here">{{ caption }}</textarea>
+                                    <input class="m-2" type="submit" value="Submit">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <div class="w-100">
+        <section>
+            <div class="container">
+                <div class="row no-gutters justify-content-center">
+                    <h1 class="text-center mt-5 mb-3 "> Retrieved Images</h1>
+                    {% for name in names %}
+                        <div class="col-xs-11 col-sm-11 col-md-6 col-lg-4 bg-image hover-zoom mb-3">
+                            <a class="bg-image"
+                               href="{{ url_for('i2i_results', dataset=dataset, query_image_name=name) }}">
+                                {#                                {% if name == target_name and target_name!="" %}#}
+                                {#                                    <img class="img-fluid image"#}
+                                {#                                         src="{{ url_for('get_image', image_name=name, dim=640, gt='True') }}"#}
+                                {#                                         alt="Frame overview">#}
+                                {#                                {% elif name != target_name and target_name!="" %}#}
+                                {#                                    <img class="img-fluid image"#}
+                                {#                                         src="{{ url_for('get_image', image_name=name, dim=640, gt='False') }}"#}
+                                {#                                         alt="Frame overview">#}
+                                {#                                {% else %}#}
+                                <img class="img-fluid image"
+                                     src="{{ url_for('get_image', image_name=name, dim=640) }}"
+                                     alt="Frame overview">
+                                {#                                {% endif %}#}
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock content %}
