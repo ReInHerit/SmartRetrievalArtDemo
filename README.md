@@ -53,7 +53,7 @@ A conda installation guide for linux systems can be found [here](https://docs.co
  
 1. Clone the repo
 ```sh
-git clone TODO insert repo url
+git clone https://github.com/ReInHerit/SmartRetrievalArtDemo insert repo url
 ```
 2. Install Python dependencies
 ```sh
