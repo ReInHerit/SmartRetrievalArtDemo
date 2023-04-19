@@ -2,7 +2,7 @@
 
 This application is part of the **ReInHerit Toolkit**.
 
-![ReInHerit Smart Retrieval logo](images/smartretrieval_logo.jpg "ReInHerit Smart Retrieval logo")
+![ReInHerit Smart Retrieval logo](source/images/smartretrieval_logo.jpg "ReInHerit Smart Retrieval logo")
 
 ## Setting up using Docker
 
@@ -155,15 +155,15 @@ By default, the server run on port 5000 of localhost address: http://127.0.0.1:5
 
 * Initially, users have the option to enter a description of the artwork they are seeking or select an image from their artwork collection.
 
-![](images/initial_page.png)
+![](source/images/initial_page.png)
 
 * Once the users have entered the description of the artwork, they will be able to view the artworks that correspond with its description.
 
-![](images/text_results.png)
+![](source/images/text_results.png)
 
 * When clicking on an artwork, the user will be able to see the artwork and the description of the artwork
 
-![](images/image_results.png)
+![](source/images/image_results.png)
 
 
 ## Authors
