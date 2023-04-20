@@ -2,6 +2,7 @@ import hashlib
 import pickle
 import random
 import re
+import os
 from io import BytesIO
 from typing import Optional
 import torch.nn.functional as F
@@ -18,6 +19,7 @@ from utils import get_uri_to_metadata_dict
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = server_base_path / 'uploaded_files'
+PORT = os.environ.get('PORT', 5000)
 
 if torch.cuda.is_available():
     device = torch.device("cuda")
@@ -196,4 +198,4 @@ def _load_assets():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=PORT)
