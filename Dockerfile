@@ -1,4 +1,4 @@
-FROM cnstark/pytorch:1.7.1-py3.9.12-ubuntu18.04
+FROM python:3.8.0-slim
 
 # Create a working directory
 WORKDIR /app
@@ -15,8 +15,13 @@ RUN pip install \
 RUN pip3 install -r requirements.txt
 
 COPY source/ .
+RUN python3 ./download_model.py
 COPY descriptors/ .
-COPY dataset/ .
+COPY dataset/noisyart_dataset/noisyart ./noisyart_dataset/noisyart
+COPY dataset/noisyart_dataset/test_200 ./noisyart_dataset/test_200
+COPY dataset/noisyart_dataset/trainval_200 ./noisyart_dataset/trainval_200
+COPY dataset/noisyart_dataset/trainval_3120_a/ ./noisyart_dataset/trainval_3120
+COPY dataset/noisyart_dataset/trainval_3120_b/ ./noisyart_dataset/trainval_3120
 
 ENV PORT=${PORT:-5000}
 EXPOSE ${PORT}

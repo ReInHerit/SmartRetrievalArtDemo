@@ -19,7 +19,7 @@ from utils import get_uri_to_metadata_dict
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = server_base_path / 'uploaded_files'
-PORT = os.environ.get('PORT', 5000)
+PORT = os.environ.get('PORT', 5555)
 
 if torch.cuda.is_available():
     device = torch.device("cuda")
