@@ -8,7 +8,7 @@ from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normal
 
 server_base_path = Path(__file__).absolute().parent.absolute()
 data_path = Path(__file__).absolute().parent.absolute() / 'data'
-dataset_root = server_base_path / 'noisyart_dataset'
+dataset_root = server_base_path
 
 
 def is_image_file(filename: str) -> bool:

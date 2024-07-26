@@ -1,7 +1,7 @@
 git+https://github.com/openai/CLIP.git
 contextlib2
 opencv-python
-flask
+flask==2.2.5
 gevent
 gunicorn
 requests
