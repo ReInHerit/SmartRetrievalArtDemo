@@ -1,1 +1,1 @@
-Copy here the features computed with extract_features.py (see README.md) to create a DOcker image
+Copy here the features computed with extract_features.py (see README.md) to create a Docker image

@@ -95,7 +95,7 @@ class NoisyArtDataset(Dataset):
         try:
             image = self.preprocess(PIL.Image.open(self.image_paths[index]))
         except Exception as e:
-            print(f"Exception occured: {e}")
+            print(f"Exception occurred: {e}")
             return None
         return image, "/".join(image_path.split('/')[-2:]), label
 
