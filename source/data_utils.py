@@ -102,4 +102,42 @@ class NoisyArtDataset(Dataset):
     def __len__(self):
         return len(self.image_paths)
 
+
+
+class METDataset(Dataset):
+    def __init__(self, preprocess: callable, split: str):
+        super().__init__()
+        self.split = split
+        self.preprocess = preprocess
+
+        self.dataset_root = server_base_path / 'MET_dataset'
+        self.class_names = set([class_path.name for class_path in (self.dataset_root / 'trainval_3120').iterdir()])
+
+        if split in ['val', 'train', 'trainval']:
+            split_file = self.dataset_root / 'MET' / 'splits' / f"{split}.txt"  # contains 1 image name per line
+            with open(split_file) as f:
+                split_images_path = set(f.read().splitlines())
+
+            self.image_paths = [image_path for image_path in (self.dataset_root / 'trainval_3120').glob('**/*') if
+                                is_image_file(str(image_path)) and str(image_path.relative_to(
+                                    self.dataset_root / 'trainval_3120')) in split_images_path]
+        else:
+            self.image_paths = [image_path for image_path in (self.dataset_root / 'test_200').glob('**/*') if
+                                is_image_file(str(image_path))]
+        self.class_names = sorted(list(self.class_names))
+
+    def __getitem__(self, index):
+        image_path = str(self.image_paths[index])
+        image_class = self.image_paths[index].parent.name
+        label = self.class_names.index(image_class)
+        try:
+            image = self.preprocess(PIL.Image.open(self.image_paths[index]))
+        except Exception as e:
+            print(f"Exception occurred: {e}")
+            return None
+        return image, "/".join(image_path.split('/')[-2:]), label
+
+    def __len__(self):
+        return len(self.image_paths)
+
 # ---------------------------------------------------------
