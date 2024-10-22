@@ -84,7 +84,7 @@ class NoisyArtDataset(Dataset):
                                 is_image_file(str(image_path)) and str(image_path.relative_to(
                                     self.dataset_root / 'trainval_3120')) in split_images_path]
         else:
-            self.image_paths = [image_path for image_path in (self.dataset_root / 'test_200').glob('**/*') if
+            self.image_paths = [image_path for image_path in (self.dataset_root / 'test_200').glob('**/*') if   # TODO keep only test_200
                                 is_image_file(str(image_path))]
         self.class_names = sorted(list(self.class_names))
 

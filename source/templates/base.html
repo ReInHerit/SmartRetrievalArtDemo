@@ -2,19 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}{% endblock %} Conditioned Image Retrieval App</title>
+    <title>{% block title %}{% endblock %} ReInHerit Smart Retrieval demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/boxicons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mystyle.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mdb.dark.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mdb.min.css') }}">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/img/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/img/favicon/android-chrome-192x192.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body class="bg-light d-flex flex-column min-vh-100">
-<nav class="navbar navbar-expand navbar-light pb-0 pt-1" style="background-color: #ef6c00">
-    <a class="navbar-brand hover-shadow-soft justify-content-start mx-3" href="{{ url_for('choice') }}"><b>HOME</b></a>
+<nav class="navbar navbar-expand navbar-light pb-0 pt-1" style="background-color: #009de0">
+    <a href="https://reinherit-hub.eu/applications" target="_blank" title="ReInHerit Digital Hub">
+        <img id="header_logo" alt="reinherit logo" src="/static/img/reinherit-logo-square-300x300.jpg">
+    </a>
+    <div id="header_title">
+        <em>Re</em><strong>InHerit</strong>
+        <div id="undertitle">Redefining the Future of Cultural Heritage</div>
+    </div>
+    <a class="navbar-brand hover-shadow-soft justify-content-start mx-3" href="{{ url_for('query') }}"><strong style="color: #ffffff">               Smart Retrieval demo Home</strong></a>
 {#    <div class="collapse navbar-collapse">#}
 {#        <ul class="navbar-nav nav nav-tabs navbar-right">#}
 {#            <li class="nav-item mx-1">#}
@@ -38,17 +49,17 @@
 
 </div>
 
-<footer class="mt-auto mb-2">
-    <hr>
-    <div class="text-center">
-        <a href="https://www.micc.unifi.it/">Media Integration and Communication Center - MICC</a><br>
-        <p>Università degli studi di Firenze, Italy</p>
-{#        <p>Code and more details available at <a href="https://github.com/ABaldrati/CLIP4CirDemo"> <i#}
-{#                class="fa fa-github fa-2x" aria-hidden="true"></i></a></p>#}
-        <a href="https://scholar.google.it/citations?hl=en&user=I1jaZecAAAAJ">Alberto Baldrati</a>,
-        <a href="https://scholar.google.it/citations?user=SBm9ZpYAAAAJ&hl=en">Marco Bertini</a>,
-        <a href="https://scholar.google.it/citations?user=XHZLRdYAAAAJ&hl=en">Tiberio Uricchio</a>,
-        <a href="https://scholar.google.it/citations?user=bf2ZrFcAAAAJ&hl=en">Alberto Del Bimbo</a>
+<footer id="footer">
+    <div class="footer_container">
+        <h3><em>Re</em><strong>InHerit</strong> Toolkit</h3>
+
+        <div class="social-links">
+            <a href="https://twitter.com/reinherit_" target="_blank" title="twitter" class="twitter"><i class="bx bxl-twitter"></i></a>
+            <a href="https://www.facebook.com/ReInHerit/" target="_blank" title="facebook" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="https://www.instagram.com/reinherit_/" target="_blank" title="instagram" class="instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/reinherit-h2020" target="_blank" title="linkedin" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            <a href="https://www.youtube.com/channel/UCWg6SySC2I-RQ41qjxZmTmA" target="_blank" title="youtube" class="youtube"><i class="bx bxl-youtube"></i></a>
+        </div>
     </div>
 </footer>
 </body>

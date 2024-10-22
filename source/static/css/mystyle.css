@@ -1,0 +1,130 @@
+body, html {
+  font-family: 'Roboto', serif;
+}
+
+#header_logo {
+    max-height: 5vh;
+    margin: 1vh;
+    float: left;
+}
+
+#undertitle {
+    font-size: 1.5vh;
+
+}
+
+#header_title {
+    color: #FFFFFF;
+    line-height: 1;
+    font-size: 4vh;
+}
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+#footer {
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 0;
+    z-index: 10;
+}
+
+.footer_container {
+    background: #009de0;
+    position: relative;
+    height: 7vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#footer h3 {
+    font-size: 2vw;
+    font-weight: 400;
+    color: #fff;
+    position: relative;
+    line-height: 5%;
+    margin: 0 1vw 0 2vw;
+}
+
+#footer .social-links {
+    margin: 0 2vw;
+}
+
+#footer .social-links a {
+    font-size: 3vh;
+    display: inline-block;
+    color: #fff;
+    padding: 0.5vh 6px;
+    border-radius: 50%;
+    text-align: center;
+    width: 3.4vh;
+    transition: 0.3s;
+}
+
+#footer .social-links a:hover {
+    background: #fdf003;
+    color: #11303b;
+    text-decoration: none;
+}
+
+@media screen and (min-width: 450px) and (max-width: 769px) {
+    #footer h3 {
+        font-size: 3vw;
+    }
+
+    #footer .social-links a {
+        font-size: 4vw;
+        padding: 0.5vh 6px;
+    }
+
+}
+
+@media screen and (max-height: 450px) and (max-width: 1000px) and (orientation: landscape) {
+    #email-button, #reset-button {
+        top: 2vh;
+    }
+    #footer .social-links a {
+        font-size: 3vh;
+        padding: 0.5vh 6px;
+    }
+}
+
+@media screen and (min-width: 450px) and (max-width: 769px) and (orientation: landscape) {
+    #footer h3 {
+        font-size: 3vw;
+    }
+
+    #footer .social-links a {
+        font-size: 3vw;
+    }
+
+}
+
+@media screen and (max-width: 449px) {
+
+    /*#footer {*/
+    /*    position: fixed;*/
+    /*}*/
+
+    #footer h3 {
+        font-size: 4vw;
+        line-height: 6vh;
+    }
+
+    #footer .social-links {
+        display: inline-block;
+        margin: 1vh;
+    }
+
+    #footer .social-links a {
+        position: relative;
+        font-size: 5vw;
+        width: 5vw;
+        padding: 1vw;
+        height: 7vw;
+    }
+}

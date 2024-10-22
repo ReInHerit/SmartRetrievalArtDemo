@@ -20,6 +20,8 @@ from utils import get_uri_to_metadata_dict
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = server_base_path / 'uploaded_files'
 PORT = os.environ.get('PORT', 5555)
+USE_ONLY_TEST = True  # simplify the demo using only test_200/ images
+
 
 if torch.cuda.is_available():
     device = torch.device("cuda")
@@ -31,7 +33,7 @@ else:
 
 @app.route('/')
 def choice():
-    return redirect(url_for('query'))
+    return render_template('intro.html')
 
 
 @app.route('/favicon.ico')
@@ -60,7 +62,7 @@ def custom_caption(dataset: str, old_caption: Optional[str] = None):
 
 @app.route('/<string:dataset>/<string:caption>')
 def t2i_results(dataset: str, caption: str):
-    n_retrieved = 50
+    n_retrieved = 20
 
     text_inputs = clip.tokenize(caption, truncate=True).to(device)
     with torch.no_grad():
@@ -78,7 +80,7 @@ def t2i_results(dataset: str, caption: str):
 
 @app.route('/<string:dataset>/artwork/<string:query_image_name>')
 def i2i_results(dataset: str, query_image_name: str):
-    n_retrieved = 50
+    n_retrieved = 40
 
     query_index = global_index_hashes.index(query_image_name)
     query_features = F.normalize(global_index_features[query_index], dim=-1)
@@ -86,7 +88,7 @@ def i2i_results(dataset: str, query_image_name: str):
     index_features = F.normalize(global_index_features)
 
     cos_similarity = query_features @ index_features.T
-    sorted_indices = torch.topk(cos_similarity, n_retrieved * 3, largest=True).indices.cpu()
+    sorted_indices = torch.topk(cos_similarity, n_retrieved, largest=True).indices.cpu()
     sorted_index_names = np.array(global_index_hashes)[sorted_indices].flatten()
 
     # Get metadata informations
@@ -107,9 +109,9 @@ def i2i_results(dataset: str, query_image_name: str):
 @app.route('/get_image/<string:image_name>/<int:dim>/<string:gt>')
 @app.route('/get_image/<string:image_name>/<string:gt>')
 def get_image(image_name: str, dim: Optional[int] = None, gt: Optional[str] = None):
-    if image_name in test_hash_to_path:  # TODO
+    if image_name in test_hash_to_path:
         image_path = dataset_root / 'noisyart_dataset' / 'test_200' / global_hash_to_path[image_name]
-    elif image_name in trainval_hash_to_path:
+    elif image_name in trainval_hash_to_path and not USE_ONLY_TEST:
         image_path = dataset_root / 'noisyart_dataset' / 'trainval_3120' / global_hash_to_path[image_name]
     else:
         raise ValueError()
@@ -138,6 +140,8 @@ def get_image(image_name: str, dim: Optional[int] = None, gt: Optional[str] = No
 @app.before_first_request
 def _load_assets():
     noisyart_imgs_path = str(dataset_root / 'noisyart_dataset' / 'trainval_3120')
+    if USE_ONLY_TEST:
+        noisyart_imgs_path = str(dataset_root / 'noisyart_dataset' / 'test_200')
     noisyart_json_path = str(dataset_root / 'noisyart_dataset' / 'noisyart' / 'metadata.json')
 
     global uri_to_metadata
@@ -177,18 +181,28 @@ def _load_assets():
 
     # Combined
     global global_index_features
-    global_index_features = torch.vstack((trainval_index_features, test_index_features)).type(data_type).to(device)
+    if USE_ONLY_TEST:
+        global_index_features = test_index_features.to(device)
+    else:
+        global_index_features = torch.vstack((trainval_index_features, test_index_features)).type(data_type).to(device)
 
     global global_index_paths
-    global_index_paths = trainval_index_paths + test_index_paths
+    if USE_ONLY_TEST:
+        global_index_paths = test_index_paths
+    else:
+        global_index_paths = trainval_index_paths + test_index_paths
 
     global global_hash_to_path
     global_hash_to_path = {}
-    global_hash_to_path.update(trainval_hash_to_path)
+    if not USE_ONLY_TEST:
+        global_hash_to_path.update(trainval_hash_to_path)
     global_hash_to_path.update(test_hash_to_path)
 
     global global_index_hashes
-    global_index_hashes = trainval_index_hashes + test_index_hashes
+    if USE_ONLY_TEST:
+        global_index_hashes = test_index_hashes
+    else:
+        global_index_hashes = trainval_index_hashes + test_index_hashes
 
     # Load CLIP model and Combiner networks
     global clip_model

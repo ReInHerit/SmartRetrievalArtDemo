@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="text-center p-3">Smart Retrieval demo</h1>
+
+    <div class="w-100">
+        <section>
+            <div class="container">
+                <div class="row no-gutters justify-content-center">
+                    <div class="col-10 mb-4">
+                        <p class="text-justify">This demo is a simple example of how to search artworks using textual
+                            description or selecting a reference image to search for visually similar artworks.</p>
+                        <p class="text-justify">In this demo we use the <a href="https://www.sciencedirect.com/science/article/pii/S0167865519302739" target="_blank">NoisyArt
+                            dataset</a>, a challenging dataset designed to support research of the multimedia and
+                            computer vision communities on webly-supervised recognition of artworks.
+                            The dataset was also designed to support multi-modality learning and zero-shot learning,
+                            thanks to it's multi-modal nature.
+                            Our method has obtained <a href="https://link.springer.com/chapter/10.1007/978-3-031-20302-2_11" target="_blank">state-of-the-art
+                                results</a> on this dataset. Note that the system does not use any metadata for
+                            retrieval !</p>
+                        <p class="text-justify">The dataset contains several real-world variations of the same artwork,
+                            including both professional and user-generated images, to evaluate the robustness of the
+                            system even in cases of strong differences of the visual content.</p>
+                    </div>
+
+                    <h1 class="text-center mt-5 mb-3 " style="color: #009de0"><a href="{{ url_for('query') }}">Start demo</a></h1>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+{% endblock content %}

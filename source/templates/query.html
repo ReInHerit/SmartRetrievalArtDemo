@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1 class="text-center p-3">Search for an artwork inserting a description</h1>
+    <h2 class="text-center p-3">Search for an artwork inserting a description...</h2>
 
     <div class="w-100">
         <section>
@@ -11,12 +11,12 @@
                             <label for="custom_caption"></label>
                             <textarea class='form-control' required="required" style="font-size: large"
                                       id='custom_caption' name='custom_caption' rows="3"
-                                      type="text" placeholder="Describe the artwork you would like to retrieve"></textarea>
+                                      type="text" placeholder="Describe the artwork you would like to retrieve and press Submit button."></textarea>
                             <input class="m-2" type="submit" value="Submit">
                         </form>
                     </div>
 
-                  <h1 class="text-center mt-5 mb-3 ">Or browse through the artwork collection</h1>
+                  <h2 class="text-center mt-5 mb-3 ">...or browse through the artwork collection</h2>
                     {% for name in names %}
                         <div class="col-xs-11 col-sm-11 col-md-6 col-lg-4 bg-image hover-zoom mb-3">
                             <a class="bg-image"
